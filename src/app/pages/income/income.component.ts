@@ -11,16 +11,23 @@ export class IncomeComponent implements OnInit {
 
   constructor(private modalService: BsModalService) { }
   modalRef: BsModalRef;
-  income: Income;
+  incomes: Income[];
 
   ngOnInit() {
-    this.income = {
+    this.incomes = [{
       id: 12,
       incomeGroupId: 2,
       incomeNameGroupId: "รายได้เสริม",
       amount: 200,
       date: "2012-04-23T18:25:44Z"
-    }
+    },
+    {
+      id: 13,
+      incomeGroupId: 2,
+      incomeNameGroupId: "รายได้เสริม",
+      amount: 400,
+      date: "2012-04-23T18:25:44Z"
+    }]
   }
 
   openModal(template: TemplateRef<any>) {

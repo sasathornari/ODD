@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr *ngFor="let income of incomes">
                 <td>{{income.id}}</td>
                 <td>{{income.date}}</td>
                 <td>{{income.incomeNameGroupId}}</td>
