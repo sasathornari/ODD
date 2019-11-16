@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Income } from 'src/app/models/income';
 import { HttpClient } from '@angular/common/http';
+import { IncomeService } from 'src/app/services/income.service';
 
 @Component({
   selector: 'app-income',
@@ -12,13 +13,15 @@ export class IncomeComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-    private http: HttpClient
+    private http: HttpClient,
+    private incomeService: IncomeService
     ) { }
+
   modalRef: BsModalRef;
   incomes: Income[];
 
   ngOnInit() {
-
+    this.incomeService.getIncomeByUserId();
     
   }
 
