@@ -4,6 +4,8 @@ import { IncomeComponent } from './income.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { IncomeService } from 'src/app/services/income.service';
+import { Income } from 'src/app/models/income';
+import { of } from 'rxjs';
 
 describe('IncomeComponent', () => {
   let component: IncomeComponent;
@@ -33,9 +35,29 @@ describe('IncomeComponent', () => {
   });
 
   it('should be called getIncomeByUserId service when call ngOnInit', () => {
-    spyOn(incomeService, 'getIncomeByUserId');
+    spyOn(incomeService, 'getIncomeByUserId').and.returnValue(of([]));
 
     component.ngOnInit();
     expect(incomeService.getIncomeByUserId).toHaveBeenCalled();
+  })
+
+  it('should be add data to incomes when call getIncomeByUserId is success', () => {
+    
+    const expected = 
+    [
+        {
+          id: 1,
+          incomeGroupId: 2,
+          incomeNameGroupId: "รายได้เสริม",
+          amount: 2999,
+          date: "2012-04-23T18:25:44Z"
+        }
+    ] as Income[];
+    
+    spyOn(incomeService, 'getIncomeByUserId').and.returnValue(of(expected));
+    component.ngOnInit();
+    expect(component.incomes).toEqual(expected);
+      
+    
   })
 });

@@ -21,7 +21,10 @@ export class IncomeComponent implements OnInit {
   incomes: Income[];
 
   ngOnInit() {
-    this.incomeService.getIncomeByUserId();
+    this.incomeService.getIncomeByUserId()
+    .subscribe( (incomes: Income[]) => {
+      this.incomes = incomes;
+    });
     
   }
 
