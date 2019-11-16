@@ -19,11 +19,7 @@ export class IncomeComponent implements OnInit {
 
   ngOnInit() {
 
-    this.http.get('http://103.74.254.157:9003/income/id/1')
-    .subscribe( (incomes: Income[]) => {
-      //console.log(incomes)
-      this.incomes = incomes;
-    })
+    
   }
 
   openModal(template: TemplateRef<any>) {
