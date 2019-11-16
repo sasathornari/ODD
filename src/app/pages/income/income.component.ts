@@ -21,7 +21,7 @@ export class IncomeComponent implements OnInit {
 
     this.http.get('http://103.74.254.157:9003/income/id/1')
     .subscribe( (incomes: Income[]) => {
-      console.log(incomes)
+      //console.log(incomes)
       this.incomes = incomes;
     })
   }
