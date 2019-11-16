@@ -74,4 +74,10 @@ describe('IncomeComponent', () => {
 
     expect(component.incomeForm.controls.incomeGroupId.value).toBe('');
   })
+
+  it('should be checked value empty amount of form', () => {
+    component.ngOnInit();
+
+    expect(component.incomeForm.controls.amount.value).toBe('');
+  })
 });

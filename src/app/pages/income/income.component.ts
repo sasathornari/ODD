@@ -31,7 +31,8 @@ export class IncomeComponent implements OnInit {
 
     this.incomeForm = this.fb.group({
       date: '',
-      incomeGroupId: ''
+      incomeGroupId: '',
+      amount: ''
     })
     
   }
