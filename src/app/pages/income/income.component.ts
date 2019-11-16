@@ -24,17 +24,26 @@ export class IncomeComponent implements OnInit {
   incomeForm: FormGroup;
 
   ngOnInit() {
-    this.incomeService.getIncomeByUserId()
-    .subscribe( (incomes: Income[]) => {
-      this.incomes = incomes;
-    });
+    
+    this.getIncomeByUserId();
+    this.createForm();
+    
+    
+  }
 
+  createForm(){
     this.incomeForm = this.fb.group({
       date: '',
       incomeGroupId: '',
       amount: ''
     })
-    
+  }
+
+  getIncomeByUserId(){
+    this.incomeService.getIncomeByUserId()
+    .subscribe( (incomes: Income[]) => {
+      this.incomes = incomes;
+    });
   }
 
   openModal(template: TemplateRef<any>) {
