@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { IncomeService } from 'src/app/services/income.service';
 import { Income } from 'src/app/models/income';
 import { of } from 'rxjs';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('IncomeComponent', () => {
   let component: IncomeComponent;
@@ -17,7 +18,8 @@ describe('IncomeComponent', () => {
       declarations: [ IncomeComponent ],
       imports: [
         ModalModule.forRoot(),
-        HttpClientModule
+        HttpClientModule,
+        ReactiveFormsModule
       ]
     })
     .compileComponents();
@@ -59,5 +61,17 @@ describe('IncomeComponent', () => {
     expect(component.incomes).toEqual(expected);
       
     
+  })
+
+  it('should be checked value empty in date of form', () => {
+    component.ngOnInit();
+
+    expect(component.incomeForm.controls.date.value).toBe('');
+  })
+
+  it('should be checked value empty income group id of form', () => {
+    component.ngOnInit();
+
+    expect(component.incomeForm.controls.incomeGroupId.value).toBe('');
   })
 });
