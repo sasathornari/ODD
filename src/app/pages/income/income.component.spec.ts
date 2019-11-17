@@ -126,7 +126,7 @@ describe('IncomeComponent', () => {
     component.incomeForm.get('incomeGroupId').setValue('3');
     component.incomeForm.get('amount').setValue('50000')
     
-    spyOn(incomeService, 'saveIncome');
+    spyOn(incomeService, 'saveIncome').and.returnValue(of([]));
     spyOn(component, 'getDateISOString').and.returnValue('2012-04-23T18:25:44Z');
     const expected = {
       amount: 50000,
