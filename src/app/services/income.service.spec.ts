@@ -24,11 +24,17 @@ describe('IncomeService', () => {
   it('should be called method get with url of income api', () => {
     // Call Results;
     service.getIncomeByUserId().subscribe();
-    const req = httpTestingController.expectOne('https://working-with-angular.herokuapp.com/income/id/1')
+    const req = httpTestingController.expectOne(`${service.SERVER_URL}/income/id/1`)
 
     // Hope
     expect(req.request.method).toBe('GET');
   })
 
+  it('should be return data income group when call method getIncomeGroup', () => {
+    service.getIncomeGroup().subscribe();
+
+    const req = httpTestingController.expectOne(`${service.SERVER_URL}/income/group`);
+    expect(req.request.method).toBe('GET');
+  })
   
 });

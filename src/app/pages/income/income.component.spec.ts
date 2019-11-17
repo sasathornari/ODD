@@ -66,9 +66,7 @@ describe('IncomeComponent', () => {
     it('should be add data to incomes when call getIncomeByUserId is success', () => {    
       
       component.ngOnInit();
-      expect(component.incomes).toEqual(expected);
-        
-      
+      expect(component.incomes).toEqual(expected);       
     })
   })
 
