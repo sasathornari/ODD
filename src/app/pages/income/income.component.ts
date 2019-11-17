@@ -74,11 +74,15 @@ export class IncomeComponent implements OnInit {
     
   }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>, income?: Income) {
     this.modalRef = this.modalService.show(template);
+    this.incomeForm.get('date').setValue(income.date);
+    this.incomeForm.get('amount').setValue(String(income.amount));
+    this.incomeForm.get('incomeGroupId').setValue(String(income.incomeGroupId));
   }
 
   edit(income: Income){
+    
     const data = {
       amount: Number(this.incomeForm.get('amount').value),
       date: this.getDateISOString(this.incomeForm.get('date').value),

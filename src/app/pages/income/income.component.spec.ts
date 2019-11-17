@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IncomeGroup } from 'src/app/models/income-group';
 import { IncomeRequest } from 'src/app/models/income-request';
 import { spawn } from 'child_process';
+import { initTimestamp } from 'ngx-bootstrap/chronos/units/timestamp';
+import { TemplateRef } from '@angular/core';
 
 describe('IncomeComponent', () => {
   let component: IncomeComponent;
@@ -176,5 +178,21 @@ describe('IncomeComponent', () => {
 
     expect(incomeService.updateIncome).toHaveBeenCalledWith(input.id, dataUpdate);
   })
-  
+
+ 
+  it('should set income data to form group when click edit', () => {   
+    const input = {
+      id: 1,
+      amount: 50000,
+      date: '11/15/2019',
+      incomeGroupId: 3,
+      incomeGroupName: 'เงินเดือน'
+    } as Income;
+    const template = fixture.debugElement.nativeElement.querySelector('#template');
+    component.openModal(template, input);
+
+    expect(component.incomeForm.get('date').value).toBe('11/15/2019');
+    expect(component.incomeForm.get('incomeGroupId').value).toBe('3');
+    expect(component.incomeForm.get('amount').value).toBe('50000');
+  })
 });

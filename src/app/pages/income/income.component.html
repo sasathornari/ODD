@@ -21,7 +21,7 @@
                 <td>{{income.date | date: 'd/M/yyyy'}}</td>
                 <td>{{income.incomeGroupName}}</td>
                 <td>{{income.amount}}</td>
-                <td><button (click)="edit(income)" class="btn btn-default">แก้ไข</button></td>
+                <td><button (click)="openModal(template, income)" class="btn btn-info btn-sm">แก้ไข</button></td>
             </tr>
         </tbody>
     </table>
