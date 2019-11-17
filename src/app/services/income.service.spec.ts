@@ -67,4 +67,37 @@ describe('IncomeService', () => {
     const req = httpTestingController.expectOne(`${service.SERVER_URL}/income`);
     expect(req.request.body).toEqual(expected); 
   })
+
+  it('should call method PUT with url of update income api', () =>{
+    const id = 1;
+    const dataRequest = {
+      amount: 50000,
+      date: '12/31/2019',
+      incomeGroupId: 3
+    } as IncomeRequest;
+    service.updateIncome(id,dataRequest).subscribe();
+    const req = httpTestingController.expectOne(`${service.SERVER_URL}/income/id/1`)
+    expect(req.request.method).toEqual('PUT')
+  })
+
+  it('should be set user id when called method update income api', () => {
+    const id = 1;
+    const dataRequest = {
+      amount: 50000,
+      date: '12/31/2019',
+      incomeGroupId: 3
+    } as IncomeRequest;
+
+    const expected = {
+      userId: 25,
+      amount: 50000,
+      date: '12/31/2019',
+      incomeGroupId: 3
+    } as IncomeRequest;
+
+    service.updateIncome(id, dataRequest).subscribe();
+
+    const req  = httpTestingController.expectOne(`${service.SERVER_URL}/income/id/1`)
+    expect(req.request.body).toEqual(expected);
+  })
 });

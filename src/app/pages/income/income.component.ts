@@ -44,6 +44,7 @@ export class IncomeComponent implements OnInit {
     .subscribe(_=>{
       //console.log('success');
       this.getIncomeByUserId();
+      //this.modalRef.hide();
     });
     
   }
