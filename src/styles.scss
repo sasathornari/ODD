@@ -26,28 +26,6 @@ p {
   flex: 1;
 }
 
-tr {
-  width: 100%;
-  display: inline-table;
-  table-layout: fixed;
-}
-
-table {
-  width: 100%;
-  height: 300px;
-  display: -moz-groupbox; // Firefox Bad Effect
-
-  td {
-    white-space: nowrap;
-  }
-}
-tbody {
-  overflow-y: scroll;
-  height: 200px;
-  width: 100%;
-  position: absolute;
-}
-
 .toolbar {
   height: 60px;
   margin: -8px;
