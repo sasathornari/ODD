@@ -8,6 +8,8 @@ import { Income } from 'src/app/models/income';
 import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IncomeGroup } from 'src/app/models/income-group';
+import { IncomeRequest } from 'src/app/models/income-request';
+import { spawn } from 'child_process';
 
 describe('IncomeComponent', () => {
   let component: IncomeComponent;
@@ -116,6 +118,24 @@ describe('IncomeComponent', () => {
     component.ngOnInit();
 
     expect(component.incomeGroup).toBe(expected);
+  })
+
+  it('should be called method saveIncome when click submit', () => {
+    
+    component.incomeForm.get('date').setValue('12/31/2019');
+    component.incomeForm.get('incomeGroupId').setValue('3');
+    component.incomeForm.get('amount').setValue('50000')
+    
+    spyOn(incomeService, 'saveIncome');
+    spyOn(component, 'getDateISOString').and.returnValue('2012-04-23T18:25:44Z');
+    const expected = {
+      amount: 50000,
+      date: '2012-04-23T18:25:44Z',
+      incomeGroupId: 3
+    } as IncomeRequest;
+
+    component.onSubmit();
+    expect(incomeService.saveIncome).toHaveBeenCalledWith(expected);
   })
 
   

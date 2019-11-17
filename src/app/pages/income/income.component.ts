@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { IncomeService } from 'src/app/services/income.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { IncomeGroup } from 'src/app/models/income-group';
+import { IncomeRequest } from 'src/app/models/income-request';
 
 @Component({
   selector: 'app-income',
@@ -34,7 +35,17 @@ export class IncomeComponent implements OnInit {
   }
 
   onSubmit(){
+    const data = {
+      amount: Number(this.incomeForm.get('amount').value),
+      date: this.getDateISOString(this.incomeForm.get('date').value),
+      incomeGroupId: Number(this.incomeForm.get('incomeGroupId').value)
+    } as IncomeRequest;
+    this.incomeService.saveIncome(data);
     console.log(this.incomeForm.value);
+  }
+
+  getDateISOString(date: string): string {
+    return new Date(date).toISOString();
   }
   createForm(){
     this.incomeForm = this.fb.group({
