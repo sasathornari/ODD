@@ -25,7 +25,7 @@ describe('IncomeService', () => {
   it('should be called method get with url of income api', () => {
     // Call Results;
     service.getIncomeByUserId().subscribe();
-    const req = httpTestingController.expectOne(`${service.SERVER_URL}/income/id/1`)
+    const req = httpTestingController.expectOne(`${service.SERVER_URL}/income/id/${service.USER_ID}`)
 
     // Hope
     expect(req.request.method).toBe('GET');

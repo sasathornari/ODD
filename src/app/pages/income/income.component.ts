@@ -42,9 +42,10 @@ export class IncomeComponent implements OnInit {
     } as IncomeRequest;
     this.incomeService.saveIncome(data)
     .subscribe(_=>{
-      console.log('success');
+      //console.log('success');
+      this.getIncomeByUserId();
     });
-    console.log(this.incomeForm.value);
+    
   }
 
   getDateISOString(date: string): string {
