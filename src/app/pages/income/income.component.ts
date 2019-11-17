@@ -4,6 +4,7 @@ import { Income } from 'src/app/models/income';
 import { HttpClient } from '@angular/common/http';
 import { IncomeService } from 'src/app/services/income.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { IncomeGroup } from 'src/app/models/income-group';
 
 @Component({
   selector: 'app-income',
@@ -22,15 +23,19 @@ export class IncomeComponent implements OnInit {
   modalRef: BsModalRef;
   incomes: Income[];
   incomeForm: FormGroup;
+  incomeGroup: IncomeGroup[];
 
   ngOnInit() {
     
     this.getIncomeByUserId();
     this.createForm();
-    
+    this.getIncomeGroup();
     
   }
 
+  onSubmit(){
+    console.log(this.incomeForm.value);
+  }
   createForm(){
     this.incomeForm = this.fb.group({
       date: '',
@@ -44,6 +49,13 @@ export class IncomeComponent implements OnInit {
     .subscribe( (incomes: Income[]) => {
       this.incomes = incomes;
     });
+  }
+
+  getIncomeGroup(){
+    this.incomeService.getIncomeGroup().subscribe(incomeGroup => {
+      this.incomeGroup = incomeGroup;
+    });
+    
   }
 
   openModal(template: TemplateRef<any>) {

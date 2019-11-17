@@ -7,6 +7,7 @@ import { IncomeService } from 'src/app/services/income.service';
 import { Income } from 'src/app/models/income';
 import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IncomeGroup } from 'src/app/models/income-group';
 
 describe('IncomeComponent', () => {
   let component: IncomeComponent;
@@ -90,6 +91,31 @@ describe('IncomeComponent', () => {
   
       expect(component.incomeForm.controls.amount.value).toBe('');
     })
+  })
+
+  it('should be called method getIncomeGroup when call ngOnInit', () => {
+    spyOn(incomeService,'getIncomeGroup').and.returnValue(of([]));
+    component.ngOnInit();
+
+    expect(incomeService.getIncomeGroup).toHaveBeenCalled()
+  });
+
+  it('should be set data of IncomeGroup when call getIncomeGroup api is success', () => {
+    const expected = [
+      {
+        "id": 1,
+        "name": "เงินเดือน"
+      },
+      {
+          "id": 2,
+          "name": "รายได้เสริม"
+      }
+    ] as IncomeGroup[];
+
+    spyOn(incomeService, 'getIncomeGroup').and.returnValue(of(expected));
+    component.ngOnInit();
+
+    expect(component.incomeGroup).toBe(expected);
   })
 
   
