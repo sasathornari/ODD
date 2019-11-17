@@ -34,7 +34,7 @@
               </button>
             </div>
 
-            {{ this.incomeForm.value | json }}
+           {{ this.incomeForm.value | json }}
             <div class="modal-body">
               <form [formGroup]="incomeForm">
                   <div class="form-group">
@@ -43,7 +43,7 @@
                       </div>
                   </div>
                   <div class="form-group">
-                    <select name="incomeGroupId" id="incomeGroupId" class="form-control" formControlName="incomeGroupId">
+                    <select name="incomeGroupName" id="incomeGroupName" class="form-control" formControlName="incomeGroupName">
                         <option value="" selected>กรุณาเลือกประเภทเงินเดือน</option>
                         <option value="1"></option>
                     </select>
