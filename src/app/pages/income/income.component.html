@@ -5,6 +5,9 @@
     <div class="card-container">
         <div class="card card-small" (click)="openModal(template)">เพิ่มรายรับ</div>
     </div>
+    <div>
+      <input type="text" class="form-control" placeholder="ค้นหา" [formControl]="searchText">
+    </div>
     <table class="table col-xs-7 col-sm-7 col-log-7">
         <thead>
             <tr>

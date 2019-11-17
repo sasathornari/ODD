@@ -3,9 +3,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Income } from 'src/app/models/income';
 import { HttpClient } from '@angular/common/http';
 import { IncomeService } from 'src/app/services/income.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { IncomeGroup } from 'src/app/models/income-group';
 import { IncomeRequest } from 'src/app/models/income-request';
+import { debounceTime, distinct, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
+import { Subscriber, Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-income',
@@ -25,12 +28,31 @@ export class IncomeComponent implements OnInit {
   incomes: Income[];
   incomeForm: FormGroup;
   incomeGroup: IncomeGroup[];
+  searchText = new FormControl();
+  subscription = new Subscription();
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit() {
     
     this.getIncomeByUserId();
     this.createForm();
     this.getIncomeGroup();
+    
+    this.searchText.valueChanges
+     .pipe(
+       filter(v => v.lenght !== 0),
+       debounceTime(500),
+       distinctUntilChanged(),
+       switchMap(v => this.incomeService.findIncome(v))
+     )
+     .subscribe(v => {
+       console.log(v);
+       this.incomes = v.map(n => ({...n, incomeGroupName: n.incomeNameGroupId }));
+     });
+
     
   }
 
