@@ -1,1 +1,17 @@
-@import '../../../styles.scss'
+@import '../../../styles.scss';
+
+table {
+    position: relative;
+    tbody {
+      overflow-y: scroll;
+      height: 200px;
+      width: 100%;
+      position: absolute;
+      tr {
+        width: 100%;
+        display: inline-table;
+        table-layout: fixed;
+      }
+    }
+   }
+   
